@@ -1,19 +1,14 @@
 # JA Detailing Website
 
-Mobile-first static website for JA Detailing.
+Mobile-first JA Detailing website.
 
-## Files
-- `index.html` — home page
-- `services.html` — services and prices
-- `gallery.html` — portrait video placeholder + before/after gallery
-- `contact.html` — contact / booking page
-- `styles.css` — all styling
-- `script.js` — mobile menu + current year
-- `assets/logo.png` — supplied JA Detailing logo
-- `assets/pricing-reference.jpg` — supplied pricing graphic for reference
+## Fonts
 
-## Replace gallery placeholders
-On `gallery.html`, replace the placeholder `<div class="video-placeholder">...</div>` with a real portrait `<video>` when ready, and replace each `.photo-placeholder` with an `<img>`.
+- **Franchise** — headings, titles, navigation, buttons and display text.
+- **Montserrat** — body/written text.
 
-## Before launch
-Replace the Instagram and TikTok links in `contact.html` with JA Detailing's real profile URLs once supplied.
+The Franchise webfont is loaded remotely. The specific Franchise typeface is licensed for personal use by some distributors; for a commercial business website, obtain the appropriate commercial/webfont licence before launch.
+
+## Run locally
+
+Open `index.html` with Live Server in VS Code.
