@@ -1,23 +1,384 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#070d12"><title>Gallery | JA Detailing</title><link rel="icon" href="assets/logo.png" type="image/png"><link rel="stylesheet" href="styles.css"></head>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070d12">
+<title>Gallery | JA Detailing</title>
+<link rel="icon" href="assets/logo.png" type="image/png">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* Gallery photos */
+.gallery-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.gallery-photo:hover {
+  opacity: 0.9;
+  transform: scale(1.01);
+}
+
+.gallery-item {
+  overflow: hidden;
+}
+
+.gallery-photo-single {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  cursor: pointer;
+  display: block;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.gallery-photo-single:hover {
+  opacity: 0.9;
+  transform: scale(1.01);
+}
+
+/* Before/after images */
+.before-after {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.before-after .gallery-photo {
+  aspect-ratio: auto;
+}
+
+/* Fullscreen image viewer */
+.photo-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.94);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.photo-lightbox.active {
+  display: flex;
+}
+
+.photo-lightbox img {
+  max-width: 95vw;
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.photo-lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  color: white;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.photo-lightbox-close:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+@media (max-width: 600px) {
+  .photo-lightbox {
+    padding: 15px;
+  }
+
+  .photo-lightbox img {
+    max-width: 96vw;
+    max-height: 88vh;
+  }
+
+  .photo-lightbox-close {
+    top: 12px;
+    right: 12px;
+  }
+}
+</style>
+</head>
+
 <body>
-<header class="site-header"><div class="container nav"><a class="brand" href="index.html"><img src="assets/logo.png" alt="JA Detailing logo"><span>JA Detailing</span></a><nav><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a class="active" href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul></nav><button class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button></div><div class="mobile-menu"><a href="index.html">Home</a><a href="services.html">Services</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div></header>
-<main>
-<section class="section" style="padding-bottom:42px"><div class="container"><div class="section-kicker">JA Detailing</div><h1 class="section-title" style="font-size:clamp(48px,13vw,82px)">The<br>Gallery</h1><p class="section-copy">Real results. Professional finishes. Replace the placeholders below with JA Detailing's videos and photography.</p></div></section>
-<section class="section dark"><div class="container"><div class="video-wrap">
-  <div class="video-placeholder" role="button" tabindex="0" aria-label="Play portrait video fullscreen">
-    <video class="gallery-preview-video" preload="metadata" playsinline poster="video-poster.jpg">
-      <source src="gallery-video.mp4" type="video/mp4">
-    </video>
-    <span class="video-play" aria-hidden="true"></span>
-    <span class="placeholder-label">Portrait Video</span>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="JA Detailing logo">
+      <span>JA Detailing</span>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a class="active" href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
   </div>
-</div><div class="section-head"><div><div class="section-kicker">Before & After</div><h2 class="section-title">The<br>difference</h2></div></div><div class="gallery-grid">
-<div class="gallery-item"><div class="before-after"><div class="photo-placeholder">Before 1 Here</div><div class="photo-placeholder">After 1 Here</div></div><div class="gallery-caption">Detail 01</div></div>
-<div class="gallery-item"><div class="before-after"><div class="photo-placeholder">Before 2 Here</div><div class="photo-placeholder">After 2 Here</div></div><div class="gallery-caption">Detail 02</div></div>
-<div class="gallery-item"><div class="before-after"><div class="photo-placeholder">Before 3 Here</div><div class="photo-placeholder">After 3 Here</div></div><div class="gallery-caption">Detail 03</div></div>
-<div class="gallery-item"><div class="photo-placeholder">Photo 4 Here</div><div class="gallery-caption">Exterior</div></div>
-<div class="gallery-item"><div class="photo-placeholder">Photo 5 Here</div><div class="gallery-caption">Interior</div></div>
-<div class="gallery-item"><div class="photo-placeholder">Photo 6 Here</div><div class="gallery-caption">Final Finish</div></div>
-</div></div></section>
-</main><footer><div class="container footer-inner"><div class="footer-brand"><img src="assets/logo.png" alt=""> JA Detailing</div><div class="footer-links"><a href="index.html">Home</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div><div class="footer-note">© <span data-year></span> JA Detailing</div></div></footer><script src="script.js"></script></body></html>
+
+  <div class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</header>
+
+<main>
+
+<section class="section" style="padding-bottom:42px">
+  <div class="container">
+    <div class="section-kicker">JA Detailing</div>
+
+    <h1 class="section-title" style="font-size:clamp(48px,13vw,82px)">
+      The<br>Gallery
+    </h1>
+
+    <p class="section-copy">
+      Real results. Professional finishes. Explore the work completed by JA Detailing.
+    </p>
+  </div>
+</section>
+
+
+<section class="section dark">
+  <div class="container">
+
+    <!-- VIDEO -->
+    <div class="video-wrap">
+      <div
+        class="video-placeholder"
+        role="button"
+        tabindex="0"
+        aria-label="Play portrait video fullscreen"
+      >
+        <video
+          class="gallery-preview-video"
+          preload="metadata"
+          playsinline
+          poster="video-poster.jpg"
+        >
+          <source src="gallery-video.mp4" type="video/mp4">
+        </video>
+
+        <span class="video-play" aria-hidden="true"></span>
+        <span class="placeholder-label">Portrait Video</span>
+      </div>
+    </div>
+
+
+    <!-- GALLERY HEADING -->
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Before & After</div>
+        <h2 class="section-title">
+          The<br>difference
+        </h2>
+      </div>
+    </div>
+
+
+    <!-- PHOTO GALLERY -->
+    <div class="gallery-grid">
+
+      <!-- BEFORE / AFTER 1 -->
+      <div class="gallery-item">
+        <div class="before-after">
+          <img
+            class="gallery-photo"
+            src="before-after-1.jpg"
+            alt="JA Detailing before and after detail 1"
+            data-full="before-after-1.jpg"
+          >
+        </div>
+        <div class="gallery-caption">Detail 01</div>
+      </div>
+
+
+      <!-- BEFORE / AFTER 2 -->
+      <div class="gallery-item">
+        <div class="before-after">
+          <img
+            class="gallery-photo"
+            src="before-after-2.jpg"
+            alt="JA Detailing before and after detail 2"
+            data-full="before-after-2.jpg"
+          >
+        </div>
+        <div class="gallery-caption">Detail 02</div>
+      </div>
+
+
+      <!-- BEFORE / AFTER 3 -->
+      <div class="gallery-item">
+        <div class="before-after">
+          <img
+            class="gallery-photo"
+            src="before-after-3.jpg"
+            alt="JA Detailing before and after detail 3"
+            data-full="before-after-3.jpg"
+          >
+        </div>
+        <div class="gallery-caption">Detail 03</div>
+      </div>
+
+
+      <!-- EXTERIOR -->
+      <div class="gallery-item">
+        <img
+          class="gallery-photo-single"
+          src="exterior.jpg"
+          alt="JA Detailing exterior finish"
+          data-full="exterior.jpg"
+        >
+        <div class="gallery-caption">Exterior</div>
+      </div>
+
+
+      <!-- INTERIOR -->
+      <div class="gallery-item">
+        <img
+          class="gallery-photo-single"
+          src="interior.jpg"
+          alt="JA Detailing interior detail"
+          data-full="interior.jpg"
+        >
+        <div class="gallery-caption">Interior</div>
+      </div>
+
+
+      <!-- FINAL FINISH -->
+      <div class="gallery-item">
+        <img
+          class="gallery-photo-single"
+          src="final-finish.jpg"
+          alt="JA Detailing final finish"
+          data-full="final-finish.jpg"
+        >
+        <div class="gallery-caption">Final Finish</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+
+    <div class="footer-brand">
+      <img src="assets/logo.png" alt="">
+      JA Detailing
+    </div>
+
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="footer-note">
+      © <span data-year></span> JA Detailing
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- FULLSCREEN PHOTO VIEWER -->
+<div
+  class="photo-lightbox"
+  id="photoLightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Full size photo"
+>
+  <button
+    class="photo-lightbox-close"
+    id="photoLightboxClose"
+    aria-label="Close full size photo"
+  >
+    ×
+  </button>
+
+  <img id="lightboxImage" src="" alt="">
+</div>
+
+
+<script src="script.js"></script>
+
+<script>
+(function () {
+  const lightbox = document.getElementById("photoLightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const closeButton = document.getElementById("photoLightboxClose");
+
+  const galleryImages = document.querySelectorAll(
+    ".gallery-photo, .gallery-photo-single"
+  );
+
+  function openLightbox(image) {
+    const fullImage = image.getAttribute("data-full");
+
+    lightboxImage.src = fullImage;
+    lightboxImage.alt = image.alt || "";
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("active");
+    lightboxImage.src = "";
+    document.body.style.overflow = "";
+  }
+
+  galleryImages.forEach(function (image) {
+    image.addEventListener("click", function () {
+      openLightbox(image);
+    });
+  });
+
+  closeButton.addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", function (event) {
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeLightbox();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
