@@ -11,8 +11,8 @@ if (menuBtn && mobileMenu) {
 const year = document.querySelector('[data-year]');
 if (year) year.textContent = new Date().getFullYear();
 
-// Full-screen media viewer. Photos and videos can be tapped/clicked to open full screen.
-const mediaLightboxTargets = '.photo-placeholder, .video-placeholder, .gallery-item img, .gallery-item video, .video-wrap img, .video-wrap video';
+// Full-screen media viewer. Photos and videos can be tapped/clicked to open.
+const mediaLightboxTargets = '.video-placeholder, .gallery-item img, .gallery-item video';
 
 if (document.querySelector(mediaLightboxTargets)) {
   const lightbox = document.createElement('div');
@@ -25,6 +25,7 @@ if (document.querySelector(mediaLightboxTargets)) {
   document.body.appendChild(lightbox);
 
   const lightboxContent = lightbox.querySelector('.media-lightbox-content');
+  const closeButton = lightbox.querySelector('.media-lightbox-close');
 
   const exitVideoFullscreen = () => {
     try {
@@ -47,27 +48,18 @@ if (document.querySelector(mediaLightboxTargets)) {
   };
 
   const enterVideoFullscreen = (video) => {
-    // iPhone/iPad Safari uses this native video fullscreen API.
     if (typeof video.webkitEnterFullscreen === 'function') {
-      try {
-        video.webkitEnterFullscreen();
-        return;
-      } catch (_) {}
+      try { video.webkitEnterFullscreen(); return; } catch (_) {}
     }
-    if (video.requestFullscreen) {
-      video.requestFullscreen().catch(() => {});
-    }
+    if (video.requestFullscreen) video.requestFullscreen().catch(() => {});
   };
 
   const openLightbox = (target) => {
     lightboxContent.innerHTML = '';
 
     let sourceVideo = null;
-    if (target.matches('video')) {
-      sourceVideo = target;
-    } else if (target.matches('.video-placeholder')) {
-      sourceVideo = target.querySelector('video');
-    }
+    if (target.matches('video')) sourceVideo = target;
+    else if (target.matches('.video-placeholder')) sourceVideo = target.querySelector('video');
 
     if (sourceVideo) {
       const video = sourceVideo.cloneNode(true);
@@ -79,15 +71,10 @@ if (document.querySelector(mediaLightboxTargets)) {
       video.setAttribute('playsinline', '');
       video.setAttribute('controls', '');
       lightboxContent.appendChild(video);
-
       video.addEventListener('ended', closeLightbox, { once: true });
-
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.classList.add('lightbox-open');
-
-      // The click that opened the viewer supplies the user gesture, so sound
-      // playback is allowed. Start first, then enter the device's fullscreen.
       const playPromise = video.play();
       if (playPromise && typeof playPromise.then === 'function') {
         playPromise.then(() => enterVideoFullscreen(video)).catch(() => enterVideoFullscreen(video));
@@ -97,35 +84,24 @@ if (document.querySelector(mediaLightboxTargets)) {
       return;
     }
 
-    if (target.matches('img')) {
-      const img = target.cloneNode(true);
-      img.removeAttribute('width');
-      img.removeAttribute('height');
-      lightboxContent.appendChild(img);
-    } else {
-      const placeholder = document.createElement('div');
-      placeholder.className = 'lightbox-placeholder';
-      placeholder.textContent = target.querySelector('.placeholder-label')?.textContent || target.textContent.trim() || 'Media Here';
-      lightboxContent.appendChild(placeholder);
-    }
-
+    const img = target.cloneNode(true);
+    img.removeAttribute('width');
+    img.removeAttribute('height');
+    lightboxContent.appendChild(img);
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.classList.add('lightbox-open');
   };
 
-  // Delegation means newly-added photos/videos will work automatically too.
   document.addEventListener('click', event => {
+    // Never allow clicks inside the open lightbox to trigger the gallery opener again.
+    if (event.target.closest('.media-lightbox')) return;
     const target = event.target.closest(mediaLightboxTargets);
     if (!target) return;
-
-    // If the user clicked a control inside the fullscreen viewer, don't reopen it.
-    if (event.target.closest('.media-lightbox')) return;
     event.preventDefault();
     openLightbox(target);
   });
 
-  // Keyboard accessibility for the portrait video preview.
   document.addEventListener('keydown', event => {
     if ((event.key === 'Enter' || event.key === ' ') && event.target.closest('.video-placeholder')) {
       event.preventDefault();
@@ -134,11 +110,14 @@ if (document.querySelector(mediaLightboxTargets)) {
     if (event.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
   });
 
-  lightbox.querySelector('.media-lightbox-close').addEventListener('click', closeLightbox);
+  closeButton.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    closeLightbox();
+  });
+
   lightbox.addEventListener('click', event => {
     if (event.target === lightbox) closeLightbox();
   });
-
-  // If native/standard fullscreen ends without the video ending, leave the
-  // lightbox open so the user can continue watching or close it normally.
 }

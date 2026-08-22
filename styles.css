@@ -195,3 +195,35 @@ footer{padding:35px 0;border-top:1px solid var(--line);background:#050a0e}
   z-index:201;
 }
 body.lightbox-open{overflow:hidden}
+
+/* Customer reviews */
+.reviews-section{background:var(--bg)}
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+.review-card{background:linear-gradient(145deg,#0e1820,#0a1117);border:1px solid var(--line);border-radius:14px;padding:24px;position:relative;overflow:hidden}
+.review-card:before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:var(--blue)}
+.review-card-centre{grid-column:1 / -1;width:min(100%,560px);justify-self:center}
+.review-stars{color:#f4c542;font-size:20px;letter-spacing:3px;line-height:1;margin-bottom:15px}
+.review-name{font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:24px;letter-spacing:.05em;margin-bottom:9px}
+.review-card p{color:var(--muted);font-size:15px;line-height:1.7}
+
+/* Gallery media sizing */
+.before-after{height:100%;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.before-after-item{min-height:0}
+.before-after .gallery-photo{width:100%;height:100%;min-height:100%;aspect-ratio:auto;object-fit:cover;cursor:zoom-in}
+.gallery-photo-single .gallery-photo{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}
+
+/* Updated service presentation */
+.service-time{color:var(--muted);font-size:13px;margin-top:-4px!important}
+.service-subheading{margin-top:22px;margin-bottom:7px;font-family:'Oswald',sans-serif;text-transform:uppercase;color:var(--blue-bright);letter-spacing:.1em;font-size:15px}
+.ultra-includes{color:#dce3e8!important;margin-top:18px!important;font-weight:600}
+.ultra-highlight{margin-top:18px;padding:18px;border:1px solid rgba(22,118,255,.32);border-left:4px solid var(--blue-bright);border-radius:10px;background:linear-gradient(145deg,rgba(22,118,255,.08),rgba(7,13,18,.35))}
+.ultra-highlight-title{font-family:'Oswald',sans-serif;text-transform:uppercase;color:#fff;font-size:22px;letter-spacing:.05em;margin-bottom:9px}
+.extra p{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.55}
+.service-note{font-size:12px;line-height:1.8;color:#8795a1;font-style:italic;border-left:2px solid var(--blue);padding-left:16px;max-width:820px}
+.service-note-title{color:#aab7c2;font-weight:700;letter-spacing:.08em;margin-bottom:5px}
+.services-note{padding-top:12px;padding-bottom:55px}
+
+@media(max-width:759px){
+  .reviews-grid{grid-template-columns:1fr}
+  .review-card-centre{grid-column:auto;width:100%}
+}
