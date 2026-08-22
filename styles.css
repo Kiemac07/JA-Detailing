@@ -210,7 +210,7 @@ body.lightbox-open{overflow:hidden}
 .before-after{display:block;width:100%;height:auto}
 .before-after-item{min-height:0}
 .before-after .gallery-photo{display:block;width:100%;height:auto;min-height:0;aspect-ratio:auto;object-fit:cover;cursor:zoom-in}
-.gallery-photo-single .gallery-photo{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}
+.gallery-photo-single .gallery-photo{display:block;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}
 
 /* Updated service presentation */
 .service-time{color:var(--muted);font-size:13px;margin-top:-4px!important}
