@@ -369,7 +369,11 @@
     });
   });
 
-  closeButton.addEventListener("click", closeLightbox);
+  closeButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+  closeLightbox();
+});
 
   lightbox.addEventListener("click", function (event) {
     if (event.target === lightbox) {
