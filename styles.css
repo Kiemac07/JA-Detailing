@@ -79,6 +79,7 @@ h1{font-size:clamp(52px,14vw,100px);letter-spacing:-.025em;max-width:760px}
 .placeholder-label{font-family:'Oswald';text-transform:uppercase;letter-spacing:.1em;color:#b8c5cf;position:absolute;bottom:24px}
 .gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .gallery-item{background:#0c141b;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.gallery-item img{width:100%;aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}
 .photo-placeholder{aspect-ratio:4/3;display:grid;place-items:center;background:linear-gradient(135deg,#142433,#091117);color:#aebbc5;font-family:'Oswald';text-transform:uppercase;letter-spacing:.08em;font-size:14px}
 .gallery-caption{padding:13px 14px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.05em;font-size:15px}
 .before-after{display:grid;grid-template-columns:1fr 1fr;gap:2px}
